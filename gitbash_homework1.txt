@@ -1,0 +1,169 @@
+﻿HW_1. The first part
+Linux terminal (GitBash) commands
+
+команда + (пример)
+
+1) Посмотреть где я - 
+pwd
+
+2) Создать папку - 
+mkdir foldername (mkdir lessons)
+
+3) Зайти в папку - 
+cd foldername (cd lessons)
+
+4) Создать 3 папки - 
+mkdir foldername1 foldername2 foldername3 (mkdir gitbash JS SQL)
+
+5) Зайти в любую папку - 
+cd foldername (cd gitbash)
+
+6) Создать 5 файлов (3 txt, 2 json):
+   - touch filename1.txt filename2.txt filename3.txt filename4.json filename5.json (touch theory.txt commands.txt homework.txt test1.json test2.json)
+   
+   ИЛИ (по отдельности + можно сразу внести данные в файлы):
+   - cat > filename1.txt -> Enter -> Ctrl+C
+   - cat > filename2.txt -> Enter -> Ctrl+C
+   ...
+   
+7) Создать 3 папки - 
+mkdir foldername1 foldername2 foldername3 (mkdir video screen posts)
+
+8) Вывести список содержимого папки: 
+   1. ls -la  #вся инфа об объектах (папках) в столбик)  Атрибут 'a' показывает скрытые папки, файлики
+   2. ls -l  #аналогично первому, но СКРЫТЫЕ не отобразятся)
+   3. ls -a  #отобразятся ВСЕ папки и файлы в строку)
+   4. ls    #папки и файлы в строку, за исключением скрытых)
+   
+9) + Открыть любой txt файл - 
+cat >> filename.txt (cat >> commands.txt)
+
+10) + написать туда что-нибудь, любой текст - 
+открывается режим ввода данных, перенос на новую строку через Enter (pwd Enter mkdir Enter cd Enter cat Enter touch Enter ls -la Enter)
+
+11) + сохранить и выйти - 
+Ctrl+C 
+Можем прочитать файл, удостовериться, что данные сохранены: cat filename.txt (cat commands.txt)
+
+ИЛИ используем vim - текстовый редактор в терминале:
+    vim filename.txt -> "i" для перехода в режим insert (редактирование) -> вносим данные или корректировки
+    -> ESC(выход из редактирования) -> ":wq"= записать и закрыть) (не сохранять - :q!)
+
+12) Выйти из папки на уровень выше - 
+cd ../
+
+
+13) переместить любые 2 файла, которые вы создали, в любую другую папку:
+   1. По отдельности, в разные папки:
+      mv foldername(from)/filename1.txt foldername(where)/filename1.txt     (mv gitbash/theory.txt JS/theory.txt)
+      mv foldername(from)/filename2.json foldername(where)/filename2.json    (mv gitbash/test1.json gitbash/screen/test1.json)
+   2. Сразу 2 файла в одну папку:
+      mv foldername(from)/{filename1.json,filename2.json} foldername(where)   (mv gitbash/{test1.json,test2.json} gitbash/screen)
+
+14) скопировать любые 2 файла, которые вы создали, в любую другую папку:
+cp foldername(from)/{filename1.json,filename2.json} foldername(where)   (cp gitbash/{commands.txt,homework.txt} SQL/)
+
+15) Найти файл по имени - 
+find . -name "filename.txt"  (find . -name "homework.txt")
+
+16) просмотреть сожержимое в реальном времени -
+tail -f filename.txt (tail -f commands.txt)
+
+(команда grep) изучить как она работает - если нужен не полностью весь файл, а только несколько строк, с интересующей нас информацией, 
+можно выполнить просмотр файла предварительно отсеяв все лишнее с помощью grep:
+1. поиск по вхождениям букв, слов или определенного выражения: 
+        grep <string> filename.txt (grep mkdir commands.txt) = mkdir	
+2. поиск без учета регистра: 
+        grep -i <string> filename.txt (grep Mkdir commands.txt) = mkdir
+3. поиск конкретного слова (слова целиком): 
+        grep -iw <string> filename.txt (grep -iw mkdir commands.txt) = mkdir
+4. поиск по выражению и номера строк, в которых оно встречается: 
+        grep -iwn <string> filename.txt (grep -iwn mkdir commands.txt) = 2:mkdir
+5. поиск по строкам до: 
+        grep -B number <string> filename.txt (grep -B 2 mkdir commands.txt) = 2:mkdir; 3-cd; 4-cat
+6. поиск по строкам после: 
+        grep -A number <string> filename.txt (grep -A 2 mkdir commands.txt) = 1-pwd 2:mkdir
+7. поиск по строкам до и после: 
+        grep -С number <string> filename.txt (grep -C 2 mkdir commands.txt) = 1-pwd 2:mkdir; 3-cd; 4-cat
+8. поиск во всех файлах в папке: 
+        grep <string> ./* (grep mkdir ./*) = ./commands.txt:2:mkdir; ./homework.txt:1:mkdir
+9. поиск во всех файлах и папках: 
+        grep -r <string> ./* (grep -r mkdir ./*) = ./commands.txt:2:mkdir;  ./video/commands.txt:2:mkdir
+10. поиск количества вхожений слова в файле: 
+        grep -c <string> filename.txt (grep -c mkdir commands.txt) = 1
+
+Соответственно, мы можем, просматривая содержимое файла в реальном времени с помощью tail -f, сразу выбирать только те строки, 
+в которых присутствуют нужные буквы/слова/фразы/выражения:
+tail -f filename.txt | grep <string>
+
+
+17) вывести несколько первых строк из текстового файла - 
+head -3 filename.txt (head -3 commands.txt) = pwd; mkdir; cd
+
+18) вывести несколько последних строк из текстового файла - 
+tail filename.txt (tail -3 commands.txt) = cat; touch; ls -la
+
+19) просмотреть содержимое длинного файла (команда less) изучите как она работает - 
+less filename.txt 
+    
+Утилита less выводит содержимое файла, но отображает его только в рамках текущего окна в режиме просмотра:
+    * можно прокручивать текст файла клавишами стрелок или перелистывать страницы клавишами - w и z
+    * для поиска текста внутри файла - /
+    * для просмотра списка доступных горячих клавиш - h 
+    * выйти из режима просмотра клавиша - q
+
+20) вывести дату и время - 
+date (Fri May 21 10:50:24 RTZ 2022)
+
+=========
+
+Задание *
+1) Отправить http запрос на сервер http://162.55.220.72:5005/terminal-hw-request - 
+curl "http://162.55.220.72:5005/terminal-hw-request"
+ 
+ Ответ {"Intro":"Hello!! Это ваш первый ответ от сервера",
+ "Tasks":{"Task_1":"Отправить следующий URL в терминале: http://162.55.220.72:5005/get_method?name=(set_your_<string>)&age=(set_your_number)",
+ "result":["Your_<string>","Your_number"]}}
+ 
+ Выполнение Task_1: curl "http://162.55.220.72:5005/get_method?name=Evgenia&age=26"
+
+
+2) Написать скрипт который выполнит автоматически пункты 3, 4, 5, 6, 7, 8, 13
+
+#Cоздание скрипта
+cat > script.sh
+#!/bin/bash
+cd foldername
+mkdir foldername1 foldername2 foldername3
+cd foldername1
+touch filename1.txt filename2.txt filename3.txt filename4.json filename5.json
+mkdir foldername4 foldername5 foldername6
+ls -la
+mv {filename4.json,filename5.json} foldername5
+
+#жмем Enter
+#далее Ctrl+C
+
+#Установка прав - 'все' могут 'выполнять' скрипт
+chmod a+x script.sh
+
+#Запуск скрипта на выполнение 
+./script.sh
+
+
+Пример:
+cat > script.sh
+#!/bin/bash
+cd lesson1
+mkdir gitbash JS SQL
+cd gitbash
+touch theory.txt commands.txt homework.txt test1.json test2.json
+mkdir video screen posts
+ls -la
+mv {test1.json,test2.json} screen
+
+# жмем Enter
+# далее Ctrl+C
+
+chmod a+x script.sh
+./script.sh
